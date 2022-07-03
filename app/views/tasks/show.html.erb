@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+
+<p>
+  <strong>Done:</strong>
+  <%= @task.done %>
+</p>
+<p>
+  <strong>Created At:</strong>
+  <%format = @task.created_at.in_time_zone('Asia/Dhaka')%>
+  <%= format.strftime("%d %b, %y at %I : %M %p")%>
+</p>
+<p>
+  <strong>Updated At:</strong>
+    <%format = @task.updated_at.in_time_zone('Asia/Dhaka')%>
+  <%= format.strftime("%d %b, %y at %I : %M %p")%>
+</p>
+<p>
+<% if @task.done == true %>
+  <strong>Time Taken to Finish Task: </strong>
+  <%=(@task.updated_at-@task.created_at).floor()  %> seconds
+<% else %>
+<%= "Task not completed yet."%>
+<%end%>
+</p>
+<%= link_to tasks_path,class:"btn btn-dark text-light" do %>
+<i class="fas fa-angle-left"></i> 
+<%end%>
+
+<%= link_to edit_task_path(@task),class:"btn btn-dark text-light" do %> 
+<i class="fa-solid fa-pen"></i> 
+<%end%>
+
