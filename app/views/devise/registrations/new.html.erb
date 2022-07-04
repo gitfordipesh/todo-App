@@ -1,31 +1,53 @@
-<div class="card  bg-glass">
-  <div class="card-header">
-    <h4>Sign up</h4>
+<style>
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+</style>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <div class="card  bg-glass">
+          <div class="card-header">
+            <h4>Sign up</h4>
+          </div>
+          <div class="card-body px-4 py-5 px-md-5">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="field form-group">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-control",placeholder: "Email address"%>
+            </div>
+
+            <div class="field form-group">
+              <%= f.password_field :password, autocomplete: "new-password" ,class: "form-control",placeholder: "New Password"%>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+            </div>
+
+            <div class="field form-group">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "form-control",placeholder: "Confirm Password"%> 
+            </div>
+            <br/>
+            <div class="actions">
+              <%= f.submit "Sign up" , class:"btn btn-primary"%>
+            </div>
+          <% end %>
+          <br/>
+          <%= render "devise/shared/links"%>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="card-body px-4 py-5 px-md-5">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <div class="field form-group">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-control",placeholder: "Email address"%>
-    </div>
-
-    <div class="field form-group">
-      <%= f.password_field :password, autocomplete: "new-password" ,class: "form-control",placeholder: "New Password"%>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-    </div>
-
-    <div class="field form-group">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "form-control",placeholder: "Confirm Password"%> 
-    </div>
-    <br/>
-    <div class="actions">
-      <%= f.submit "Sign up" , class:"btn btn-primary"%>
-    </div>
-  <% end %>
-  <br/>
-  <%= render "devise/shared/links"%>
-  </div>
-</div>
+</section>

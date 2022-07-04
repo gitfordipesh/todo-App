@@ -4,8 +4,9 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.where(done: false)
-    @taskss = Task.where(done: true).order(id: :desc).paginate(:page => params[:page], :per_page => 5)
+    u = current_user
+    @tasks = u.tasks.where(done: false)
+    @taskss = u.tasks.where(done: true).order(id: :desc).paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -23,7 +24,8 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    u = current_user
+    @task = u.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
@@ -67,6 +69,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :done)
+      params.require(:task).permit(:title, :done, :user_id)
     end
 end
